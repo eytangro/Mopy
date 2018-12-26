@@ -1,4 +1,4 @@
-from Connections.Rest.requests.ExampleRequest import ExampleRequest
+import Mopy.Connections.Rest.ExampleRequest
 
 def RestExample():
     er =ExampleRequest()

@@ -1,10 +1,10 @@
 import json
-
 import requests
 
-class RestManager():
+
+class RestManager:
     def __init__(self, url=None):
-        if url!=None:
+        if url != None:
             self.url = url
 
     def Post(self, data):

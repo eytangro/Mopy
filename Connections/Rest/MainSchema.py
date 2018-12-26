@@ -1,18 +1,20 @@
 from marshmallow import Schema, fields, post_load
-from Connections.Rest.RestManager import RestManager
+
+from Mopy.Connections.Rest.RestManager import RestManager
+
 
 class RequestSchema(Schema):
-    def __init__(self,data):
+    def __init__(self, data):
         super(RequestSchema, self).__init__()
-        self.name=data["name"]
-        self.type = data["type"]
-        self.url = data["url"]
-        self.js = data["js"]
+        self.name = data["jobId"]
+        self.type = data["timestamp"]
+        self.url = data["pipeline"]
+        self.js = data["status"]
         self.data = data["data"]
-        self.params=data["params"]
-        self.apiParams=data["apiParams"]
+        self.params = data["timeTook"]
+        self.apiParams = data["storageModule"]
         self.dataItem = data
-        self.rest=RestManager()
+        self.rest = RestManager()
 
     name = fields.Str()
     type = fields.Str()
@@ -20,11 +22,11 @@ class RequestSchema(Schema):
     js = fields.Dict()
     data = fields.Str()
     params = fields.Dict()
-    apiParams=fields.Str()
+    apiParams = fields.Str()
 
     @post_load
-    def make_obj(self,data=None):
-        print("im in "+self.type)
+    def make_obj(self, data=None):
+        print("im in " + self.type)
         if self.type == "post":
             return self.rest.Post(self.dataItem)
         elif self.type == "get":
